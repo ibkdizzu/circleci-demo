@@ -25,6 +25,3 @@ workflows:
   say-hello-workflow:
     jobs:
       - test_job_failure
-      - failure_exception:
-          requires:
-            - test_job_failure
