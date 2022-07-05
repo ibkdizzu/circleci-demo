@@ -12,11 +12,18 @@ commands:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  test_command:
+  test_job_failure:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id
+      - run: return 1
+  
+  failure_exception:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo "check log files for error message"
+      - when: on_fail
 
 
     
@@ -26,4 +33,7 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - test_command
+      - test_job_failure
+      - failure_exception:
+          requires:
+            - test_job_failure
