@@ -10,14 +10,11 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: return 1
-  
-  failure_exception:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run: echo "check log files for error message"
-      - when: on_fail
+      - run: exit 1
+      - run: 
+          name: on error
+          command: echo "check log files for error message"
+          when: on_fail
 
 
     
