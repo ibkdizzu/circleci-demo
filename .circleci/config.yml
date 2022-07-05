@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo "print hello" > output.txt
+          command: echo "print hello" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
